@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+        <title>Explorer :: {{ title }}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/explorer-%s.css' % theme) }}">
+        <style>
+            {% for type in ['folder', 'image', 'video', 'audio', 'text', 'archive', 'pdf', 'unknown'] %}
+                .icon-{{ type }} {
+                    background-image: url("{{ url_for('static', filename='icons/%s.png' % type) }}");
+                }
+            {% endfor %}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <a href="/"><img src="{{ url_for('static', filename='icons/computer.png') }}"></a>
+            <h3 class="folder-path">
+                {% for parent in parents %}
+                    / <a href="{{ parent.url }}">{{ parent.name }}</a>
+                {% endfor %}
+            </h3>
+
+            <table style="width: 100%">
+                <tr>
+                    <th style="min-width: 16px; width: 16px"></th>
+                    <th class="size">Size</th>
+                    <th style="min-width: 16px; width: 16px"></th>
+                    <th style="text-align: left;">Name
+                        <a class="popup-view-urls" href="?ls">
+                            <img src="{{ url_for('static', filename='icons/clipboard.png') }}" alt="View File URLs">
+                        </a>
+                    </th>
+                </tr>
+                {% for dir in dirs %}
+                    <tr>
+                        <td></td>
+                        <td class="size">-</td>
+                        <td class="icon-folder"></td>
+                        <td><a href="{{ dir.url }}">{{ dir.name }}</a></td>
+                    </tr>
+                {% endfor %}
+                {% for file in files %}
+                    <tr>
+                        <td>
+                            <a href="{{ file.url }}?dl" title="Download">
+                                <img src="{{ url_for('static', filename='icons/download.png') }}" alt="Download">
+                            </a>
+                        </td>
+                        <td class="size">{{ file.size }}</td>
+                        <td class="icon-{{ file.type }}"></td>
+                        <td>
+                            {% if file.type is in ['archive', 'unknown'] %}
+                                <a class="popup-{{file.type}} file-url" data-mfp-src="#download-popup" href="{{ file.url }}">{{ file.name }}</a>
+                            {% else %}
+                                <a class="popup-{{file.type}} file-url" href="{{ file.url }}">{{ file.name }}</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div id="download-popup" class="popup-inline mfp-hide download-popup">
+            <h2>Preview of this file type is unavailable.</h2>
+            <button class="dl-button">DOWNLOAD</button>
+        </div>
+
+        <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/magnific-popup.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/explorer.js') }}"></script>
+    </body>
+</html>

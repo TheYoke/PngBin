@@ -1,0 +1,12 @@
+# Write/Read encrypted PngBin images
+cryptography
+
+# WebUI
+flask
+requests
+
+# Uploader
+httpx
+
+# For running Jupyter notebooks
+jupyterlab

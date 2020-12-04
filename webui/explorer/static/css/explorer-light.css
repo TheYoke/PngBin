@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, "Times New Roman", Times, serif;
+    background-color: azure;
+}
+.container {
+  margin: auto;
+  margin-top: 30px;
+  width: 800px;
+}
+th, td {
+    border-bottom: 1px solid #ddd;
+}
+.folder-path {
+    display: inline;
+    margin-top: 5px;
+    position: absolute;
+    margin-left: 10px;
+}
+.icon-folder, .icon-image, .icon-video, .icon-audio, .icon-text, .icon-archive, .icon-pdf, .icon-unknown {
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 16px;
+}
+a:link {
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+    background-color: wheat;
+}
+a:active {
+    text-decoration: underline;
+}
+.size {
+    min-width: 90px;
+    width: 90px;
+    text-align: right;
+    padding-right: 15px;
+}
+.source-link {
+    color: rgb(148, 213, 243);
+}
+.popup-inline {
+  position: relative;
+  background: #F2F2F2;
+  padding: 20px;
+  width: auto;
+  max-width: 800px;
+  margin: 20px auto;
+  border-radius: 10px;
+}
+
+.copy-btn:hover {
+    background-color: #FFF5F5;
+}
+.copy-btn:active {
+    background-color: #F5FFF5;
+}
+.copy-btn {
+    margin: 10px;
+    padding: 10px;
+    border: solid 2px;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #F6F5FF;
+}
+
+#download-popup {
+    text-align: center;
+}
+
+.dl-button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  margin: 20px;
+}
+
+.dl-button:hover {
+    background-color: #3e8e41;
+}
+
+.dl-button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.mfp-title {
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.mfp-counter {
+    position: absolute;
+    margin-top: 10px;
+    margin-right: 10px;
+    top: unset;
+}
+.mfp-iframe-scaler iframe {
+    background-color: #F2F2F2;
+}
+.mfp-figure::after {
+    background-color: white;
+}
