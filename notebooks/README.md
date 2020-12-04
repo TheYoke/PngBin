@@ -12,7 +12,7 @@ By using [creator.ipynb](creator.ipynb) you can convert a whole directory of fil
 
 ## 2. Upload your newly created images to image hosting
 
-![diagram](diagrams/uploader.png)
+![diagram](diagrams/Uploader.png)
 
 Choose one of the available notebooks to upload your images to, or create your own python module and notebook to upload to image hosting of your choice.  
 This step also produces a list of uploaded image urls (`urls.txt`).
