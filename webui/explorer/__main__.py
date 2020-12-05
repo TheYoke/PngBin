@@ -8,6 +8,7 @@ import sqlite3
 import argparse
 import sys
 import os
+import io
 
 
 SERVER_DEBUG = False  # if True, run server in debug mode.
@@ -229,7 +230,10 @@ def send_file(path):
 
         first += offset
         headers['Content-Length'] = str(length)
-        reader = ChainReader(_get_info(cur, images_id), first, length, decrypt=True, auto_close=True)
+        if length > 0:
+            reader = ChainReader(_get_info(cur, images_id), first, length, decrypt=True, auto_close=True)
+        else:
+            reader = io.BytesIO()
 
         reader_close = reader.close
         reader.close = lambda: reader_close() or conn.close()
