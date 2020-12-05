@@ -1,3 +1,5 @@
+[![Run on Repl.it](https://repl.it/badge/github/TheYoke/PngBin)](https://repl.it/github/TheYoke/PngBin)
+
 # What is PngBin?
 The name **PngBin** comes from an image format file extension **PNG** (**P**ortable **N**etwork **G**raphics) and the word **Bin**ary. An image produced by PngBin will have every property like a normal PNG image except that when viewed by an image viewer, It will appear broken and noisy (which is normal for any PngBin images). By utilizing the lossless data compression feature, A PNG image can be made to contain arbitrary *binary* data (this is why PngBin image can look noisy) without losing a single bit of information, Unlike JPEG image, which has lossy compression and cannot reverse its data to the original form.
 

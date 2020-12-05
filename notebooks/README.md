@@ -1,4 +1,4 @@
-# PngBin File Server Demo.
+# PngBin File Server Demo
 These notebooks are created to demonstrate a use case of PngBin by turning [most](#note-on-step-2) image hosting into a simple secret file server. This tutorial will help you go through the basic steps.  
  
 There are 4 main steps.
@@ -37,7 +37,7 @@ python -m webui.explorer -m XXX
 ```
 Where `XXX` is the path to metadata database file (e.g. meta.db).  
 After that, using your browser and go to http://127.0.0.1:8080.
-> Live demo example can be visited [here](#)
+> Live demo example can be visited [here](https://pngbindemo.theyoke.repl.co)
 
 ---
 ---
