@@ -1,0 +1,2 @@
+language = "python3"
+run = "python -m webui.explorer -m meta_example.db -i 0.0.0.0"
