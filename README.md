@@ -15,7 +15,7 @@ The possibility is there and it's up to you to decide. And of course, contributi
 
 # How is PngBin?
 It's fine, thanks for asking. JK 😝  
-As mentioned above, In general, PngBin can load any data to a PNG image file which makes almost all of the images it produces look broken and noisy unlike normal PNG images which only allow a relatively small subset of binaries to be contained so that the image would make sense.
+As mentioned above, In general, PngBin can load any data to a PNG image file which makes almost all the images it produces look broken and noisy unlike normal PNG images which only allow a relatively small subset of binaries to be contained so that the image would make sense.
 
 There are 2 main classes, `Writer` which converts any binary data to an PngBin image and `Reader` which does the opposite. These 2 classes also have their corresponding extensions `EncryptWriter` and `DecryptReader`, respectively. They are used to obscure/reveal data inside PngBin images with AES cipher. All the previously mentioned classes can convert a single image at a time which can be inconvenient in some cases, that's why `ChainWriter` and `ChainReader` are made to convert your data and split/join the images into/from multiple small images.
 
