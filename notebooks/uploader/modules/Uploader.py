@@ -90,7 +90,7 @@ class SimpleProgress:
         print(f'{bytes_read:>{n}}/{bytes_total} {bytes_read / bytes_total:.2%}', end='\r')
 
 
-class StreamMonitor:
+class StreamMonitor(httpx.SyncByteStream):
     def __init__(self, stream: Iterable[bytes], callback: Callable):
         self.stream = stream
         self.callback = callback
