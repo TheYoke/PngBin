@@ -11,12 +11,12 @@ from .Uploader import SimpleProgress, Uploader
 
 
 class Flickr(SimpleProgress, Uploader):
-    def __init__(self, cookie_sa, cookie_session):
+    def __init__(self, cookie_ffs, cookie_session):
         super().__init__(
             'POST', 'https://up.flickr.com/services/upload',
             timeout=Timeout(5.0, read=60.0),
             cookies={
-                'sa': cookie_sa,
+                'ffs': cookie_ffs,
                 'cookie_session': cookie_session
             }
         )
