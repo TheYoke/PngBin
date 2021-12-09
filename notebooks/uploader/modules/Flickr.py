@@ -1,4 +1,5 @@
 import itertools
+import time
 import json
 import os
 import re
@@ -8,6 +9,10 @@ from xml.etree import ElementTree
 from httpx import Timeout
 
 from .Uploader import SimpleProgress, Uploader
+
+
+API_RETRY = 3  # number of retries (include first try)
+API_RETRY_INTERVAL = 5  # Wait these seconds for the next retry
 
 
 class Flickr(SimpleProgress, Uploader):
@@ -29,13 +34,20 @@ class Flickr(SimpleProgress, Uploader):
         self.auth_hash, self.api_key, self.user_id = auth_hash[1], api_key[1], user_id[1]
 
     def _request_api(self, data):
-        headers = {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-        self.last_response = self.client.post('https://api.flickr.com/services/rest', headers=headers, data=data)
+        for _ in range(API_RETRY):
+            headers = {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+            self.last_response = self.client.post('https://api.flickr.com/services/rest', headers=headers, data=data)
 
-        result = json.loads(self.last_response.text)
-        assert result['stat'] == 'ok', self.last_response.text
+            if self.last_response.status_code != 200:
+                time.sleep(API_RETRY_INTERVAL)
+                continue
 
-        return result
+            result = json.loads(self.last_response.text)
+            assert result['stat'] == 'ok', self.last_response.text
+
+            return result
+        else:
+            raise FlickrAPIError('Last response status code: ' + str(self.last_response.status_code))
 
     def get_image_url_by_photo_id(self, photo_id):
         data = {
@@ -114,3 +126,7 @@ class Flickr(SimpleProgress, Uploader):
             xml = ElementTree.fromstring(self.last_response.text)
             assert xml.attrib['stat'] == 'ok', self.last_response.text
             return self.get_image_url_by_photo_id(xml[0].text), {}
+
+
+class FlickrAPIError(Exception):
+    pass
