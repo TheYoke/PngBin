@@ -241,7 +241,7 @@ def send_file(path):
         return flask.send_file(
             reader,
             as_attachment='dl' in flask.request.args,
-            attachment_filename=os.path.split(path)[1]
+            download_name=os.path.split(path)[1]
         ), status, headers
     except:
         # Developer note:
