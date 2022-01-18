@@ -9,7 +9,8 @@ The name **PngBin** comes from an image format file extension **PNG** (**P**orta
 
 # Why is PngBin?
 There are a few fun applications I can think of while working on this project. One of which is you can make most image hosting act like a file hosting by loading your files (video, music, executable, pdf, etc.) or even images to a PNG image using PngBin, then upload those loaded images to the image hosting. This method uses the advantages of most image hosting, like direct link and high speed download, to access your file easier and faster than any average free file hosting. Or you can upload them to a site where posting arbitrary files is impossible and only images (especially PNG images) are allowed.
-> Visit these [Jupyter notebooks](notebooks) for this application demo.
+> Visit these [Jupyter notebooks](notebooks) for this application demo.  
+> Live demo example can be visited [here](https://pngbindemo.theyoke.repl.co)
 
 The possibility is there and it's up to you to decide. And of course, contribution is appreciated.
 
