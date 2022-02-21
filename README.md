@@ -28,4 +28,7 @@ There are 2 main classes, `Writer` which converts any binary data to an PngBin i
 - jupyterlab (For running Jupyter notebooks)
 
 # Usage
-Look for usage, examples and more details on [Jupyter notebooks demo](notebooks).
+Look for usage, examples and more details on [Jupyter notebooks demo](notebooks).  
+
+The following video demonstrates an example of how PngBin is used.  
+[![PngBin Usage Demonstration](video.png)](https://www.youtube.com/watch?v=nsQ6xVaBfLQ)
