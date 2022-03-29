@@ -56,10 +56,12 @@ class PostImages(SimpleProgress, Uploader):
         assert result['status'] == 'OK', result
 
         response = self.client.get(result['url'])
-
-        m = re.search(r'>Direct link:.+?value="(https?://.+?)"', response.text)
-        image_url = m[1]
         m = re.search(r'>Removal link:.+?value="(https?://.+?)"', response.text)
         removal_link = m[1]
+
+        m = re.search(r'>Link:.+?value="(https?://.+?)"', response.text)
+        response = self.client.get(m[1])
+        m = re.search(r'"(https://i\.postimg\.cc/.+?)\?dl=1"', response.text)
+        image_url = m[1]
 
         return image_url, {'removal_link': removal_link}
