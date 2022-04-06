@@ -31,4 +31,4 @@ There are 2 main classes, `Writer` which converts any binary data to an PngBin i
 Look for usage, examples and more details on [Jupyter notebooks demo](notebooks).  
 
 The following video demonstrates an example of how PngBin is used.  
-[![PngBin Usage Demonstration](video.png)](https://www.youtube.com/watch?v=nsQ6xVaBfLQ)
+[![PngBin Usage Demonstration](video.png)](https://odysee.com/@TheYoke:1/PngBin-Usage-Demonstration:2)
