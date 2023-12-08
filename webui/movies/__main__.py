@@ -19,6 +19,8 @@ WEB_TITLE = 'PngBin Movies'
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0'
 APP = flask.Flask(__name__, static_url_path='/__static__')
 
+SESSION = requests.Session()
+
 
 def _get_args(argv):
     args = (
@@ -53,6 +55,13 @@ def _get_args(argv):
                     'default': '8080',
                     'help': 'Port number for the local server. (default: 8080)'
                 }
+            ),
+            (
+                ['--header_file', '-f'],
+                {
+                    'default': None,
+                    'help': 'Path to line separated "key: value" text file for request headers'
+                }
             )
         ]
     )
@@ -66,6 +75,13 @@ def _get_args(argv):
 CFG = _get_args(sys.argv[1:])
 assert os.path.isfile(CFG.meta_db), f'Database file "{CFG.meta_db}" does not exist.'
 assert os.path.isfile(CFG.movies_db), f'Database file "{CFG.movies_db}" does not exist.'
+assert CFG.header_file is None or os.path.isfile(CFG.header_file), f'Header file "{CFG.header_file}" does not exist.'
+
+if CFG.header_file:
+    with open(CFG.header_file, 'r') as fobj:
+        headers = dict(line.strip().split(': ') for line in fobj if line.strip())
+        SESSION.headers.update(headers)
+    del fobj, headers
 
 
 def _get_result_html(rows):
@@ -107,7 +123,7 @@ def _get_stream(url):
         err = None
         for _ in range(3):  # if failed, retries two more tries.
             try:
-                response = requests.get(url, headers=headers, stream=True, timeout=30.0)
+                response = SESSION.get(url, headers=headers, stream=True, timeout=30.0)
                 if response.status_code != 206:
                     raise NetReaderError('Invalid Status Code (Expect 206): ' + str(response.status_code))
                 ct = response.headers.get('Content-Type', '')
