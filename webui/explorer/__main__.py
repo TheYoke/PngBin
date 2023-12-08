@@ -29,6 +29,8 @@ EXT_TYPES = {  # Type: ['archive', 'audio', 'image', 'pdf', 'text', 'video']
     '.3g2': 'video', '.3gp': 'video', '.3gp2': 'video', '.3gpp': 'video', '.mov': 'video', '.qt': 'video'
 }
 
+SESSION = requests.Session()
+
 
 def _get_args(argv):
     args = (
@@ -56,6 +58,13 @@ def _get_args(argv):
                     'default': '8080',
                     'help': 'Port number for the local server. (default: 8080)'
                 }
+            ),
+            (
+                ['--header_file', '-f'],
+                {
+                    'default': None,
+                    'help': 'Path to line separated "key: value" text file for request headers'
+                }
             )
         ]
     )
@@ -68,6 +77,13 @@ def _get_args(argv):
 
 CFG = _get_args(sys.argv[1:])
 assert os.path.isfile(CFG.meta_db), f'Database file "{CFG.meta_db}" does not exist.'
+assert CFG.header_file is None or os.path.isfile(CFG.header_file), f'Header file "{CFG.header_file}" does not exist.'
+
+if CFG.header_file:
+    with open(CFG.header_file, 'r') as fobj:
+        headers = dict(line.strip().split(': ') for line in fobj if line.strip())
+        SESSION.headers.update(headers)
+    del fobj, headers
 
 
 class NetReaderError(Exception):
@@ -83,7 +99,7 @@ def _get_stream(url):
         err = None
         for _ in range(3):  # if failed, retries two more tries.
             try:
-                response = requests.get(url, headers=headers, stream=True, timeout=30.0)
+                response = SESSION.get(url, headers=headers, stream=True, timeout=30.0)
                 if response.status_code != 206:
                     raise NetReaderError('Invalid Status Code (Expect 206): ' + str(response.status_code))
                 ct = response.headers.get('Content-Type', '')
