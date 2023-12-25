@@ -5,6 +5,9 @@ cryptography
 flask
 requests
 
+# PBFuse
+fuse-python
+
 # Uploader
 httpx
 
